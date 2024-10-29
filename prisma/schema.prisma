@@ -1,0 +1,80 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  ADMIN
+  CLIENT
+}
+
+enum Status {
+  ACTIVED
+  INACTIVED
+  DELETED
+}
+
+enum OrderStatus {
+  OPEN
+  APROVED
+  CANCELED
+}
+
+model User {
+  id        String    @id @default(uuid())
+  fullName  String
+  birthDate DateTime?
+  cpf       String?   @unique
+  email     String    @unique
+  phone     String
+  password  String
+  createdAt DateTime  @default(now())
+  deletedAt DateTime?
+  Role      Role      @default(CLIENT)
+  Order     Order[]
+
+  @@map("users")
+}
+
+model Car {
+  id        String   @id @default(uuid())
+  status    Status   @default(ACTIVED)
+  plate     String   @unique
+  brand     String
+  model     String
+  km        Int
+  year      Int
+  price     Float
+  Items     Items[]
+  createdAt DateTime @default(now())
+  uptadedAt DateTime @updatedAt
+  Order     Order[]
+}
+
+model Items {
+  id    String @id @default(uuid())
+  name  String
+  car   Car    @relation(fields: [carId], references: [id])
+  carId String
+}
+
+model Order {
+  id               String      @id @default(uuid())
+  user             User        @relation(fields: [userId], references: [id])
+  userId           String
+  createdAt        DateTime    @default(now())
+  uptadedAt        DateTime    @updatedAt
+  status           OrderStatus @default(OPEN)
+  zipcode          String
+  city             String
+  state            String
+  totalValue       Float
+  car              Car         @relation(fields: [carId], references: [id])
+  carId            String
+  paymentDate      DateTime?
+  cancellationDate DateTime?
+}
