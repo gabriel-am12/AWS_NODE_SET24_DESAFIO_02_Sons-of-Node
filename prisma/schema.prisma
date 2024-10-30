@@ -30,7 +30,7 @@ model User {
   birthDate DateTime?
   cpf       String?   @unique
   email     String    @unique
-  phone     String
+  phone     String? 
   password  String
   createdAt DateTime  @default(now())
   deletedAt DateTime?
