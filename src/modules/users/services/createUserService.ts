@@ -1,4 +1,4 @@
-import CreateUserRepository from "../repositories/CreateUserRepository";
+import CreateUserRepository from "../repositories/createUserRepository";
 import bcrypt from "bcryptjs";
 import { CreateUserInterface } from "../interfaces/createUserInterface";
 

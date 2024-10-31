@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import createUserService from "../services/createUserService";
 import { validationResult } from "express-validator";
 import GetUserByIdService from "../services/getIdUserService";
+import ListUsersService from "../services/listUsersService";
 
 class UserController {
   async createUser(req: Request, res: Response) {
@@ -42,6 +43,44 @@ class UserController {
       }
 
       return res.status(200).json(user);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(404).json({ error: error.message });
+      } else {
+        return res.status(500).json({ error: "Erro interno." });
+      }
+    }
+  }
+
+  async listUsers(req: Request, res: Response) {
+    const {
+      fullName,
+      email,
+      isDeleted,
+      sortBy,
+      sortOrder,
+      page,
+      perPage,
+      Role,
+    } = req.query;
+
+    try {
+      const users = await ListUsersService.execute({
+        fullName: fullName as string,
+        email: email as string,
+        isDeleted: isDeleted === "true",
+        sortBy: sortBy as "fullName" | "createdAt" | "deletedAt",
+        sortOrder: "asc",
+        page: page ? Number(page) : undefined,
+        perPage: perPage ? Number(perPage) : undefined,
+        Role: "ADMIN",
+      });
+
+      if (users.users.length == 0) {
+        throw new Error("Usuários não encontrados.");
+      }
+
+      return res.status(200).json(users);
     } catch (error) {
       if (error instanceof Error) {
         return res.status(404).json({ error: error.message });

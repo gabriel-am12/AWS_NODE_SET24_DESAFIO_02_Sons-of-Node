@@ -11,7 +11,7 @@ class GetUserByIdRepository {
     return prisma.user.findFirst({
       where: {
         id,
-        Role: "ADMIN", // Filtra apenas usuários com a role "ADMIN"
+        Role: "ADMIN",
       },
       select: {
         id: true,
