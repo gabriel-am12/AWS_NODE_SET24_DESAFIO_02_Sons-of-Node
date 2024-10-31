@@ -1,7 +1,8 @@
 //@ts-nocheck
 import dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
-import { createCar, getCars, getCarById, updateCar, deleteCar } from './modules/cars/carController';
+// import authRoutes from './modules/auth/auth.routes';
+import carRoutes from './modules/cars/car.routes';
 
 
 // Carregar variáveis de ambiente
@@ -13,14 +14,9 @@ const PORT = process.env.PORT || 3000;
 // Middleware para parsing de JSON
 app.use(express.json());
 
-// Rotas para Carros
-app.post('/cars', createCar);
-app.get('/cars', getCars);
-app.get('/cars/:id', getCarById);
-app.put('/cars/:id', updateCar);
-app.delete('/cars/:id', deleteCar);
-
-
+// Rotas 
+// app.use('/auth', authRoutes);
+app.use('/cars', carRoutes);
 
 // Iniciar o servidor
 app.listen(PORT, () => {
