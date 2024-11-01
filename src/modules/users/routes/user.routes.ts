@@ -14,4 +14,6 @@ router.get("/users", UserController.listUsers);
 
 router.patch("/users/:id", updateUserValidator, UserController.updateUser);
 
+router.delete("/users/:id", UserController.deleteUser);
+
 export default router;

@@ -4,6 +4,7 @@ import { validationResult } from "express-validator";
 import GetUserByIdService from "../services/getIdUserService";
 import ListUsersService from "../services/listUsersService";
 import UpdateUserService from "../services/updateUserService";
+import deleteUserService from "../services/deleteUserService";
 
 class UserController {
   async createUser(req: Request, res: Response) {
@@ -116,6 +117,21 @@ class UserController {
         return res.status(404).json({ error: error.message });
       } else {
         return res.status(500).json({ error: "Erro interno." });
+      }
+    }
+  }
+
+  async deleteUser(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+      await deleteUserService.deleteUser(id);
+      return res.status(204).json();
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(404).json({ error: error.message });
+      } else {
+        return res.status(500).json({ error: "Erro interno" });
       }
     }
   }
