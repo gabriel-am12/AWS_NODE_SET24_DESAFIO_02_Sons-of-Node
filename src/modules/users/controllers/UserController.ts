@@ -3,6 +3,7 @@ import createUserService from "../services/createUserService";
 import { validationResult } from "express-validator";
 import GetUserByIdService from "../services/getIdUserService";
 import ListUsersService from "../services/listUsersService";
+import UpdateUserService from "../services/updateUserService";
 
 class UserController {
   async createUser(req: Request, res: Response) {
@@ -81,6 +82,35 @@ class UserController {
       }
 
       return res.status(200).json(users);
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(404).json({ error: error.message });
+      } else {
+        return res.status(500).json({ error: "Erro interno." });
+      }
+    }
+  }
+
+  async updateUser(req: Request, res: Response) {
+    const { id } = req.params;
+    const data = req.body;
+
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+      return res
+        .status(400)
+        .json({ errors: errors.array().map((error) => error.msg) });
+    }
+
+    try {
+      const updatedUser = await UpdateUserService.updateUser(id, data);
+
+      if (!updatedUser) {
+        throw new Error("Usuário não encontrado.");
+      }
+
+      return res.status(200).json({ updatedUser });
     } catch (error) {
       if (error instanceof Error) {
         return res.status(404).json({ error: error.message });

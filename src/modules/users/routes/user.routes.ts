@@ -1,14 +1,17 @@
 //@ts-nocheck
 import { Router } from "express";
 import UserController from "../controllers/UserController";
-import { userCreationValidator } from "../validators/createUserValidator";
+import { createUserValidator } from "../validators/createUserValidator";
+import updateUserValidator from "../validators/updateUserValidator";
 
 const router = Router();
 
-router.post("/users", userCreationValidator, UserController.createUser);
+router.post("/users", createUserValidator, UserController.createUser);
 
 router.get("/users/:id", UserController.getUserById);
 
 router.get("/users", UserController.listUsers);
+
+router.patch("/users/:id", updateUserValidator, UserController.updateUser);
 
 export default router;
