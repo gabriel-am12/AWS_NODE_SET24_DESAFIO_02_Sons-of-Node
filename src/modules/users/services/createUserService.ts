@@ -1,6 +1,13 @@
-import CreateUserRepository from "../repositories/createUserRepository";
+import { Role } from "@prisma/client";
+import CreateUserRepository from "../databases/createUserRepository";
 import bcrypt from "bcryptjs";
-import { CreateUserInterface } from "../interfaces/createUserInterface";
+
+interface CreateUserInterface {
+  fullName: string;
+  email: string;
+  password: string;
+  Role: Role;
+}
 
 class CreateUserService {
   async createUser(data: CreateUserInterface) {
@@ -16,7 +23,6 @@ class CreateUserService {
     const user = await CreateUserRepository.createUser({
       ...data,
       password: hashedPassword,
-      Role: "ADMIN",
     });
 
     return user;

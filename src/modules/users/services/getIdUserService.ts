@@ -1,9 +1,16 @@
 import { prisma } from "../../../config/prismaClient";
-import {
-  GetUserByIdInterface,
-  UserResponseInterface,
-} from "../interfaces/getIdUserInterface";
-import GetUserByIdRepository from "../repositories/getIdUserRepository";
+import GetUserByIdRepository from "../databases/getIdUserRepository";
+
+interface GetUserByIdInterface {
+  id: string;
+}
+
+interface UserResponseInterface {
+  id: string;
+  fullName: string;
+  email: string;
+  Role: string;
+}
 
 class GetUserByIdService {
   static async execute({

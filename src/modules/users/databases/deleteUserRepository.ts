@@ -3,7 +3,7 @@ import { prisma } from "../../../config/prismaClient";
 class deleteUserRepository {
   static async getUserId(id: string) {
     return await prisma.user.findFirst({
-      where: { id, Role: "ADMIN" },
+      where: { id },
     });
   }
 

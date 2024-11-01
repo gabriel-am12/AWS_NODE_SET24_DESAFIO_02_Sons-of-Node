@@ -1,6 +1,16 @@
 import { Role } from "@prisma/client";
 import { prisma } from "../../../config/prismaClient";
-import { listUsersInterface } from "../interfaces/listUsersInterface";
+
+interface listUsersInterface {
+  fullName?: string;
+  email?: string;
+  isDeleted?: boolean;
+  sortBy?: "fullName" | "createdAt" | "deletedAt";
+  sortOrder: "asc" | "des";
+  page?: number;
+  perPage?: number;
+  Role: string;
+}
 
 class ListUsersRepository {
   static async listUsers({
@@ -12,7 +22,7 @@ class ListUsersRepository {
     page = 1,
     perPage = 10,
   }: listUsersInterface) {
-    const where: any = { Role: "ADMIN" };
+    const where: any = {};
 
     if (fullName) where.fullName = { contains: fullName };
     if (email) where.email = { contains: email };

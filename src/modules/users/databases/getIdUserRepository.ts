@@ -1,8 +1,15 @@
 import { prisma } from "../../../config/prismaClient";
-import {
-  GetUserByIdInterface,
-  UserResponseInterface,
-} from "../interfaces/getIdUserInterface";
+
+interface GetUserByIdInterface {
+  id: string;
+}
+
+interface UserResponseInterface {
+  id: string;
+  fullName: string;
+  email: string;
+  Role: string;
+}
 
 class GetUserByIdRepository {
   static async getById({
@@ -11,13 +18,13 @@ class GetUserByIdRepository {
     return prisma.user.findFirst({
       where: {
         id,
-        Role: "ADMIN",
       },
       select: {
         id: true,
         fullName: true,
         email: true,
         Role: true,
+        createdAt: true,
       },
     });
   }

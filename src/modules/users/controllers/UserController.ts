@@ -75,7 +75,7 @@ class UserController {
         sortOrder: "asc",
         page: page ? Number(page) : undefined,
         perPage: perPage ? Number(perPage) : undefined,
-        Role: "ADMIN",
+        Role: Role as string,
       });
 
       if (users.users.length == 0) {
@@ -114,7 +114,13 @@ class UserController {
       return res.status(200).json({ updatedUser });
     } catch (error) {
       if (error instanceof Error) {
-        return res.status(404).json({ error: error.message });
+        if (error.message == "Email") {
+          return res
+            .status(400)
+            .json({ error: "Email já está sendo utilizado" });
+        } else {
+          return res.status(404).json({ error: error.message });
+        }
       } else {
         return res.status(500).json({ error: "Erro interno." });
       }

@@ -1,5 +1,12 @@
+import { Role } from "@prisma/client";
 import { prisma } from "../../../config/prismaClient";
-import { CreateUserInterface } from "../interfaces/createUserInterface";
+
+interface CreateUserInterface {
+  fullName: string;
+  email: string;
+  password: string;
+  Role: Role;
+}
 
 class CreateUserRepository {
   async findUserByEmail(email: string) {

@@ -1,4 +1,4 @@
-import deleteUserRepository from "../repositories/deleteUserRepository";
+import deleteUserRepository from "../databases/deleteUserRepository";
 
 class deleteUserService {
   static async deleteUser(id: string): Promise<void> {
