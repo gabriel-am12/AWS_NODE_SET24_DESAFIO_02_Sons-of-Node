@@ -1,24 +1,31 @@
 //@ts-nocheck
-import dotenv from 'dotenv';
 import express, { Request, Response } from 'express';
-// import authRoutes from './modules/auth/auth.routes';
+import dotenv from 'dotenv';
+import authRoutes from './modules/auth/auth.routes'; // Importa as rotas de autenticação
+import clientRoutes from './modules/auth/client.routes'; // Importa as rotas de client
 import carRoutes from './modules/cars/car.routes';
 
 
-// Carregar variáveis de ambiente
+
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 3000;
 
-// Middleware para parsing de JSON
 app.use(express.json());
 
-// Rotas 
-// app.use('/auth', authRoutes);
+app.get('/', (req: Request, res: Response) => {
+  res.send('API CompassCarV2 is running!');
+});
+
+// Rotas
+app.use('/auth', authRoutes);
+app.use('/client', clientRoutes); //rota de teste
 app.use('/cars', carRoutes);
 
 // Iniciar o servidor
 app.listen(PORT, () => {
-  console.log(`Server running in ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });
+
+export default app;
