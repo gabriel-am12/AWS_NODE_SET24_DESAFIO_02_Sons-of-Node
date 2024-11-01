@@ -17,7 +17,7 @@ async function main() {
     },
   });
 
-  // Criar cliente
+  /* Criar cliente
   await prisma.client.create({
     data: {
       fullName: 'Cliente Teste',
@@ -27,6 +27,8 @@ async function main() {
       phone: '123456789',
     },
   });
+  */
+
   
 }
 

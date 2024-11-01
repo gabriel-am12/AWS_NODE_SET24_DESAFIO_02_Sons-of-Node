@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import { Status } from '@prisma/client';
-import * as carService from './car.service';
+import * as carService from '../services/car.service';
 
 export const createCar = async (req: Request, res: Response, next: NextFunction) => {
   try {

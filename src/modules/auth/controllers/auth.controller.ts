@@ -1,7 +1,7 @@
 //auth.controller
 import { Request, Response, NextFunction } from 'express';
-import { authenticateUser } from './auth.service';
-import { loginSchema } from './auth.validation';
+import { authenticateUser } from '../services/auth.service';
+import { loginSchema } from '../auth.validation';
 import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
