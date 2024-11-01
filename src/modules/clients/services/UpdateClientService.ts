@@ -19,18 +19,22 @@ class UpdateClientService {
         phone,
         birthDate,
     }: IRequest): Promise<Client> {
-        if (!id) {
-            throw new Error('ID is required');
+
+        const clientExist = await prisma.client.findUnique({
+            where: { id },
+        });
+
+        if (!clientExist ) {
+            throw new Error('Client not found');
         }
 
-        // Validação do CPF
         if (cpf && !this.isValidCPF(cpf)) {
-            throw new Error('Invalid CPF. Must be 11 digits and not all the same.');
+            throw new Error('Invalid cpf format');
         }
-
+ 
         // Validação do Email
         if (email && !this.isValidEmail(email)) {
-            throw new Error('Invalid Email. Must be a valid format and end with .com');
+            throw new Error('Invalid email format');
         }
 
         const data: IRequest = {};
@@ -40,12 +44,12 @@ class UpdateClientService {
         if (phone) data.phone = phone;
         if (birthDate) data.birthDate = new Date(birthDate);
 
-        const clientExist = await prisma.client.update({
+        const clientUpdate = await prisma.client.update({
             where: { id },
             data,
         });
 
-        return clientExist;
+        return clientUpdate;
     }
 
     private isValidCPF(cpf: string): boolean {

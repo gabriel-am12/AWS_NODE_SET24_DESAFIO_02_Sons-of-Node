@@ -6,15 +6,34 @@ import UpdateClientService from '../services/UpdateClientService';
 import DeleteClientservice from '../services/DeleteClientservice';
 
 class ClientController {
-    public async create(req: Request, res: Response): Promise<Response> {
+    public async create(req: Request, res: Response): Promise<Response | undefined> {
         if (!req.body) {
             return res.status(400).json({ error: 'Corpo da requisição não está definido.' });
         }
-
+ 
         const { fullName, birthDate, cpf, email, phone } = req.body;
-        const client = await CreateClient.createClient({ fullName, birthDate, cpf, email, phone });
-
-        return res.status(201).json(client);
+        try{
+            const client = await CreateClient.createClient({ fullName, birthDate, cpf, email, phone });
+ 
+            return res.status(201).json(client);
+        } catch (err) {
+            if (err instanceof Error) {
+              switch (err.message) {
+                case 'Invalid email format':
+                  res.status(400).json({ message: 'Invalid email format' });
+                  break;
+                case 'Invalid cpf format':
+                  res.status(404).json({ message: 'Invalid cpf format' });
+                  break;
+                case 'Client already exists':
+                  res.status(400).json({message: 'Client already exist'});
+                default:
+                  res.status(500).json({ message: 'An unexpected error occurred: ' + err.message });
+              }
+            } else {
+              res.status(500).json({ message: 'An unexpected error occurred.' });
+            }
+          }
     }
 
     public async list(req: Request, res: Response): Promise<Response> {
@@ -56,14 +75,35 @@ class ClientController {
         return res.status(200).json(client);
     }
 
-    public async update(req: Request, res: Response): Promise<Response> {
+    public async update(req: Request, res: Response): Promise<Response | undefined> {
         const { id } = req.params;
-
+ 
         const { fullName, email, cpf, phone, birthDate } = req.body;
-
-        const client = await UpdateClientService.updateClient({ id, fullName, email, cpf, phone, birthDate });
-
-        return res.status(200).json(client);
+ 
+        try {
+            const client = await UpdateClientService.updateClient({ id, fullName, email, cpf, phone, birthDate });
+ 
+            return res.status(200).json(client);
+ 
+        }catch (err) {
+            if (err instanceof Error) {
+              switch (err.message) {
+                case 'Invalid email format':
+                  res.status(400).json({ message: 'Invalid email format' });
+                  break;
+                case 'Invalid cpf format':
+                  res.status(404).json({ message: 'Invalid cpf format' });
+                  break;
+                case 'Client not found':
+                  res.status(400).json({message: 'Client not found'});
+                default:
+                  res.status(500).json({ message: 'An unexpected error occurred: ' + err.message });
+              }
+            } else {
+              res.status(500).json({ message: 'An unexpected error occurred.' });
+            }
+          }
+       
     }
 
     public async delete(req: Request, res: Response): Promise<Response> {

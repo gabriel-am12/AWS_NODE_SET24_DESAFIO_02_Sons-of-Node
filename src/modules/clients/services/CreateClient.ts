@@ -21,12 +21,12 @@ class CreateClientService {
 
         // Validação do CPF
         if (data.cpf && !this.isValidCPF(data.cpf)) {
-            throw new Error('Invalid CPF. Must be 11 digits and not all the same.');
+            throw new Error('Invalid cpf format');
         }
-
+ 
         // Validação do Email
         if (data.email && !this.isValidEmail(data.email)) {
-            throw new Error('Invalid Email. Must be a valid format and end with .com');
+            throw new Error('Invalid email format');
         }
 
 
