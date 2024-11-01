@@ -1,10 +1,9 @@
 //@ts-nocheck
 import express, { Request, Response } from 'express';
 import dotenv from 'dotenv';
-import authRoutes from './modules/auth/routes/auth.routes'; // Importa as rotas de autenticação
+import authRoutes from './modules/auth/routes/auth.routes'; 
+import clientRouter from './modules/clients/routes/client.route';
 import carRoutes from './modules/cars/routes/car.routes';
-
-
 
 dotenv.config();
 
@@ -19,6 +18,7 @@ app.get('/', (req: Request, res: Response) => {
 
 // Rotas
 app.use('/auth', authRoutes);
+app.use('/clients', clientRouter);
 app.use('/cars', carRoutes);
 
 // Iniciar o servidor
