@@ -89,4 +89,6 @@ model Order {
   carId            String
   paymentDate      DateTime?
   cancellationDate DateTime?
+  startDate        DateTime?   // Adicionado
+  endDate          DateTime?   // Adicionado
 }

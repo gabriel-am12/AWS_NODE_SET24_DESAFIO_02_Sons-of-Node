@@ -5,6 +5,7 @@ import authRoutes from './modules/auth/routes/auth.routes';
 import userRoutes from "./modules/users/routes/user.routes"; 
 import clientRouter from './modules/clients/routes/client.route';
 import carRoutes from './modules/cars/routes/car.routes';
+import orderRoutes from './modules/orders/routes/order.routes'
 
 dotenv.config();
 
@@ -22,6 +23,7 @@ app.use('/auth', authRoutes);
 app.use("/users", userRoutes);
 app.use('/clients', clientRouter);
 app.use('/cars', carRoutes);
+app.use('/orders', orderRoutes)
 
 // Iniciar o servidor
 app.listen(PORT, () => {
