@@ -8,7 +8,7 @@
     "dev": "nodemon ./src/app.ts",
     "seed": "ts-node ./src/seeds/seed.ts",
     "test": "jest --watch",
-    "lint": "eslint 'src/**/*.{ts,tsx}' --fix"
+    "lint": "eslint --config eslint.config.js --fix"
   },
   "author": "",
   "license": "ISC",
