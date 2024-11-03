@@ -8,7 +8,7 @@
     "dev": "nodemon ./src/app.ts",
     "seed": "ts-node ./src/seeds/seed.ts",
     "test": "jest --watch",
-    "lint": "eslint 'src/**/*.{ts,tsx}' --fix"
+    "lint": "eslint --config eslint.config.js --fix"
   },
   "author": "",
   "license": "ISC",
@@ -36,9 +36,14 @@
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
+<<<<<<< HEAD
     "express-validator": "^7.2.0",
+=======
+    "axios": "^1.7.7",
+>>>>>>> orders_crud
     "bcrypt": "^5.1.1",
     "desafio02-compasscar_v2": "file:",
+    "express-validator": "^7.2.0",
     "joi": "^17.13.3",
     "jsonwebtoken": "^9.0.2"
   },

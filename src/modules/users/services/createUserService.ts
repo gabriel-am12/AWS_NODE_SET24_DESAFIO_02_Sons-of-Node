@@ -1,6 +1,6 @@
 import { Role } from "@prisma/client";
 import CreateUserRepository from "../databases/createUserRepository";
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 
 interface CreateUserInterface {
   fullName: string;

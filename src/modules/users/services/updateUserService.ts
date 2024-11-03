@@ -1,4 +1,4 @@
-import bcrypt from "bcryptjs";
+import bcrypt from "bcrypt";
 import UpdateUserRepository from "../databases/updateUserRepository";
 
 interface UpdateUserInterface {
