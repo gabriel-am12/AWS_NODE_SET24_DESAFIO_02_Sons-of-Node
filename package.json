@@ -36,11 +36,7 @@
   },
   "dependencies": {
     "@prisma/client": "^5.21.1",
-<<<<<<< HEAD
-    "express-validator": "^7.2.0",
-=======
     "axios": "^1.7.7",
->>>>>>> orders_crud
     "bcrypt": "^5.1.1",
     "desafio02-compasscar_v2": "file:",
     "express-validator": "^7.2.0",
