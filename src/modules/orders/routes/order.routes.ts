@@ -121,21 +121,9 @@ const router = Router();
  *           schema:
  *             type: object
  *             properties:
- *               carId:
- *                 type: string
- *                 example: "car12345"
- *               clientId:
- *                 type: string
- *                 example: "client12345"
  *               zipcode:
  *                 type: string
  *                 example: "12345678"
- *               city:
- *                 type: string
- *                 example: "São Paulo"
- *               state:
- *                 type: string
- *                 example: "SP"
  *     security:
  *       - BearerAuth: []
  *     responses:
