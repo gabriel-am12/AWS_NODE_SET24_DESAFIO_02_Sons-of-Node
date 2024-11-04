@@ -84,12 +84,20 @@ clientRouter.post('/', authenticateToken, ClientController.create);
  * /clients:
  *   get:
  *     tags: [Clients]
- *     summary: Listar todos os clientes
+ *     summary: Listar todos os clientes ou clientes excluídos
  *     security:
  *       - BearerAuth: []
+ *     parameters:
+ *       - in: query
+ *         name: orderBy
+ *         required: false
+ *         description: Filtra os resultados. Use "excluido" para listar apenas clientes excluídos.
+ *         schema:
+ *           type: string
+ *           example: "excluido"
  *     responses:
  *       200:
- *         description: Lista de clientes
+ *         description: Lista de clientes ou clientes excluídos
  *         content:
  *           application/json:
  *             schema:
@@ -110,6 +118,9 @@ clientRouter.post('/', authenticateToken, ClientController.create);
  *                     type: string
  *                   phone:
  *                     type: string
+ *                   excluded:
+ *                     type: boolean
+ *                     description: Indica se o cliente foi excluído
  */
 clientRouter.get('/', authenticateToken, ClientController.list);
 
