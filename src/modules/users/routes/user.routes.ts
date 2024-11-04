@@ -135,10 +135,6 @@ const router = Router();
  *               email:
  *                 type: string
  *                 example: "mariabetania@gmail.com"
- *               role:
- *                 type: string
- *                 enum: [ADMIN, USER]
- *                 example: "USER"
  *     security:
  *       - BearerAuth: []
  *     responses:
