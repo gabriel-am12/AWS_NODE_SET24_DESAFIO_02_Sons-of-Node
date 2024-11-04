@@ -95,7 +95,34 @@ router.post('/', authenticateToken, validate(carSchema), carController.createCar
  *             schema:
  *               type: array
  *               items:
- *                 $ref: '#/components/schemas/Car'
+ *                 type: object
+ *                 properties:
+ *                   plate:
+ *                     type: string
+ *                     example: ABC-1234
+ *                   brand:
+ *                     type: string
+ *                     example: Toyota
+ *                   model:
+ *                     type: string
+ *                     example: Corolla
+ *                   year:
+ *                     type: integer
+ *                     example: 2020
+ *                   km:
+ *                     type: integer
+ *                     example: 15000
+ *                   price:
+ *                     type: integer
+ *                     example: 90000
+ *                   Items:
+ *                     type: array
+ *                     items:
+ *                       type: string
+ *                     example: ["Ar-condicionado", "Direção hidráulica"]
+ *                   status:
+ *                     type: string
+ *                     example: ACTIVED
  */
 router.get('/', authenticateToken, carController.getCars);
 
