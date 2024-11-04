@@ -64,7 +64,15 @@ const router = Router();
  * /users:
  *   get:
  *     tags: [Users]
- *     summary: Listar todos os usuários
+ *     summary: Listar todos os usuários, incluindo removidos
+ *     parameters:
+ *       - in: query
+ *         name: isDeleted
+ *         required: false
+ *         description: Filtrar usuários removidos (true para visualizar removidos)
+ *         schema:
+ *           type: boolean
+ *           example: true
  *     security:
  *       - BearerAuth: []
  *     responses:
@@ -85,6 +93,8 @@ const router = Router();
  *                     type: string
  *                   role:
  *                     type: string
+ *                   isDeleted:
+ *                     type: boolean
  */
 
 /**
@@ -171,7 +181,7 @@ const router = Router();
  */
 
 router.post("/create", authenticateToken, createUserValidator, UserController.createUser);
-router.get("/", authenticateToken, UserController.listUsers);
+router.get("/", authenticateToken, UserController.listUsers); // Aqui já está a lógica para isDeleted
 router.get("/:id", authenticateToken, UserController.getUserById);
 router.patch("/update/:id", authenticateToken, updateUserValidator, UserController.updateUser);
 router.delete("/delete/:id", authenticateToken, UserController.deleteUser);
