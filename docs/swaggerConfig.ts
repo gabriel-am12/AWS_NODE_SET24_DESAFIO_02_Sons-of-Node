@@ -8,7 +8,7 @@ const swaggerOptions = {
     info: {
       title: 'API Documentation',
       version: '1.0.0',
-      description: 'API Documentation for the Compass CAR project',
+      description: 'API do projeto Compass CAR para gerenciar autenticação, clientes, veículos e pedidos de forma segura e eficiente',
     },
     servers: [
       {

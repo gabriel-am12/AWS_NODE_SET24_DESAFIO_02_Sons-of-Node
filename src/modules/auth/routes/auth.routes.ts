@@ -6,7 +6,7 @@ const router = Router();
 /**
  * @openapi
  * tags:
- *   - name: Authentication
+ *   - name: Autenticação
  *     description: Operações relacionadas à autenticação
  */
 
@@ -14,10 +14,10 @@ const router = Router();
  * @openapi
  * /auth/login:
  *   post:
- *     summary: User login
- *     description: Log in with email and password to receive an authentication token.
+ *     summary: Login do usuário
+ *     description: Realiza login com email e senha para receber um token de autenticação.
  *     tags:
- *       - Authentication
+ *       - Autenticação
  *     requestBody:
  *       required: true
  *       content:
@@ -33,7 +33,7 @@ const router = Router();
  *                 example: admin123
  *     responses:
  *       200:
- *         description: Login successful
+ *         description: Login realizado com sucesso
  *         content:
  *           application/json:
  *             schema:
@@ -42,7 +42,7 @@ const router = Router();
  *                 token:
  *                   type: string
  *       401:
- *         description: Invalid credentials
+ *         description: Credenciais inválidas
  */
 router.post('/login', login);
 
